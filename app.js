@@ -1,4 +1,4 @@
-console.log("test");
+
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
 import { getDatabase,
@@ -21,6 +21,22 @@ const firebaseConfig = {
   
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  const analytics = getDatabase(app);
-
+  const mySkiDatatbase = getDatabase(app);
 console.log(app);
+
+
+
+
+
+  function writeUserData() {
+    
+    let message = {
+     message: "Best Skis",
+     votes: 0,
+    };
+     
+    set(ref(mySkiDatatbase, "messages/"), message);
+  }
+ 
+  writeUserData();
+
