@@ -1,7 +1,7 @@
 console.log("test");
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
-import { getDatabase
+import { getDatabase,
 ref,
 set,
 } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js";
