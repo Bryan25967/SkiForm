@@ -4,6 +4,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase
 import { getDatabase,
 ref,
 set,
+push,
+onValue
 } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js";
 
 // Your web app's Firebase configuration
@@ -31,12 +33,20 @@ console.log(app);
   function writeUserData() {
     
     let message = {
-     message: "Best Skis",
-     votes: 0,
+    message: "best skis for 2022",
+    votes: 0,
     };
+     const postMessagesRef = ref(mySkiDatatbase, "messages");
+     const newMessagesRef = push(postMessagesRef);
      
-    set(ref(mySkiDatatbase, "messages/"), message);
+     set(newMessagesRef, message);
   }
  
+  function getAllMessages() {
+      const allMessagesRef = ref(mySkiDatatbase, "messages");
+      onValue(allMessagesRef, (snapshot))
+  }
+
+
   writeUserData();
 
