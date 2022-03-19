@@ -24,18 +24,22 @@ const firebaseConfig = {
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const mySkiDatatbase = getDatabase(app);
-console.log(app);
+
+const messageBoard = document.querySelector(".message-board")
 
 
+const messageText = document.querySelector("#message");
+const postToBoardButton = document.querySelector(".btn")
 
-
+postToBoardButton.addEventListener('click', writeUserData);
 
   function writeUserData() {
     
-    // let message = {
-    // message: "best skis for 2022",
-    // votes: 0,
-    // };
+    let message = {
+    message: messageText.value,
+    votes: 0,
+    };
+
      const postMessagesRef = ref(mySkiDatatbase, "messages");
      const newMessagesRef = push(postMessagesRef);
      
@@ -47,6 +51,36 @@ console.log(app);
       onValue(allMessagesRef, snapshot => {
         const allMessages = snapshot.val();
         console.log(allMessages);
+
+        for(let id in allMessages) {
+          let message = allMessages[id].message;
+          let votes = allMessages[id].votes;
+
+          let newLiTag = document.createElement("li");
+          newLiTag.textContent = message;
+
+          let deleteElement = document.createElement("i");
+          deleteElement.classList.add("fa", "fa-trash", "pull-right", "delete");
+      
+
+          let upVoteElement = document.createElement("i");
+          upVoteElement.classList.add("fa", "fa-thumbs-up", "pull-right");
+         
+
+          let downVoteElement = document.createElement("i");
+          downVoteElement.classList.add("fa", "fa-thumbs-down", "pull-right");
+          
+          
+         let showVotesElement = document.createElement("div");
+         showVotesElement.classList.add("pull-right");
+         showVotesElement.textContent = votes;
+         newLiTag.append(deleteElement, downVoteElement, upVoteElement, showVotesElement);
+  
+          messageBoard.append(newLiTag);
+
+        };
+
+          
       });
   }
 
