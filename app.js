@@ -5,7 +5,9 @@ import { getDatabase,
 ref,
 set,
 push,
-onValue
+onValue,
+update,
+child
 } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js";
 
 // Your web app's Firebase configuration
@@ -27,7 +29,6 @@ const firebaseConfig = {
 
 const messageBoard = document.querySelector(".message-board")
 
-
 const messageText = document.querySelector("#message");
 const postToBoardButton = document.querySelector(".btn")
 
@@ -42,7 +43,7 @@ postToBoardButton.addEventListener('click', writeUserData);
     };
     messageText.value = "";
      const postMessagesRef = ref(mySkiDatatbase, "messages");
-     const newMessagesRef = push(postMessagesRef);
+    //  const newMessagesRef = push(postMessagesRef);
      set(push(postMessagesRef), message);
      
      set(newMessagesRef, message);
@@ -69,17 +70,30 @@ postToBoardButton.addEventListener('click', writeUserData);
 
           let upVoteElement = document.createElement("i");
           upVoteElement.classList.add("fa", "fa-thumbs-up", "pull-right");
+          upVoteElement.addEventListener("click", function(event) {
+            let messageId = event.target.parentNode.getAttribute("data-id");
+            let messageToUpdate = child(allMessagesRef, messageId);
+           update(messageToUpdate, { votes: ++votes });
+                       
+          });
          
 
           let downVoteElement = document.createElement("i");
           downVoteElement.classList.add("fa", "fa-thumbs-down", "pull-right");
+          downVoteElement.addEventListener("click", function(event) {
+            let messageId = event.target.parentNode.getAttribute("data-id");
+            let messageToUpdate = child(allMessagesRef, messageId);
+           update(messageToUpdate, { votes: --votes });
+                       
+          });
           
           
          let showVotesElement = document.createElement("div");
          showVotesElement.classList.add("pull-right");
          showVotesElement.textContent = votes;
          newLiTag.append(deleteElement, downVoteElement, upVoteElement, showVotesElement);
-  
+          
+         newLiTag.setAttribute('data-id', id)
          messages.push(newLiTag);
 
          };
