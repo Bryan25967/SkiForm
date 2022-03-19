@@ -33,24 +33,28 @@ const postToBoardButton = document.querySelector(".btn")
 
 postToBoardButton.addEventListener('click', writeUserData);
 
-  function writeUserData() {
-    
+  function writeUserData(event) {
+    event.preventDefault();
+
     let message = {
     message: messageText.value,
     votes: 0,
     };
-
+    messageText.value = "";
      const postMessagesRef = ref(mySkiDatatbase, "messages");
      const newMessagesRef = push(postMessagesRef);
+     set(push(postMessagesRef), message);
      
      set(newMessagesRef, message);
   }
  
   function getAllMessages() {
+  
       const allMessagesRef = ref(mySkiDatatbase, "messages");
+     
       onValue(allMessagesRef, snapshot => {
         const allMessages = snapshot.val();
-        console.log(allMessages);
+         const messages = [];
 
         for(let id in allMessages) {
           let message = allMessages[id].message;
@@ -76,11 +80,15 @@ postToBoardButton.addEventListener('click', writeUserData);
          showVotesElement.textContent = votes;
          newLiTag.append(deleteElement, downVoteElement, upVoteElement, showVotesElement);
   
-          messageBoard.append(newLiTag);
+         messages.push(newLiTag);
 
-        };
+         };
+        messageBoard.innerHTML = "";
+        messages.forEach(message => {
+        messageBoard.append(message)
+        });
 
-          
+        // messageBoard.append(newLiTag);  
       });
   }
 
