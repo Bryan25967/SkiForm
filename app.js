@@ -32,10 +32,10 @@ console.log(app);
 
   function writeUserData() {
     
-    let message = {
-    message: "best skis for 2022",
-    votes: 0,
-    };
+    // let message = {
+    // message: "best skis for 2022",
+    // votes: 0,
+    // };
      const postMessagesRef = ref(mySkiDatatbase, "messages");
      const newMessagesRef = push(postMessagesRef);
      
@@ -44,9 +44,13 @@ console.log(app);
  
   function getAllMessages() {
       const allMessagesRef = ref(mySkiDatatbase, "messages");
-      onValue(allMessagesRef, (snapshot))
+      onValue(allMessagesRef, snapshot => {
+        const allMessages = snapshot.val();
+        console.log(allMessages);
+      });
   }
 
 
-  writeUserData();
+  // writeUserData();
+  window.onload = getAllMessages();
 
