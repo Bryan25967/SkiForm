@@ -23,6 +23,7 @@ const firebaseConfig = {
     measurementId: "G-3MSMB6QMXT"
   };
   
+  // email change
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const mySkiDatatbase = getDatabase(app);
