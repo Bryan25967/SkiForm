@@ -34,7 +34,14 @@ const messageBoard = document.querySelector(".message-board")
 const messageText = document.querySelector("#message");
 const postToBoardButton = document.querySelector(".btn")
 
-postToBoardButton.addEventListener('click', writeUserData);
+
+
+messageText.addEventListener("keypress", (event) => {
+  if (event.keyCode === 13) {
+    writeUserData(event);
+  }else(postToBoardButton.addEventListener("click", writeUserData))
+});
+
 
   function writeUserData(event) {
     event.preventDefault();
@@ -48,7 +55,7 @@ postToBoardButton.addEventListener('click', writeUserData);
     //  const newMessagesRef = push(postMessagesRef);
      set(push(postMessagesRef), message);
      
-     set(newMessagesRef, message);
+    //  set(newMessagesRef, message);
   }
  
   function getAllMessages() {
