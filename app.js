@@ -7,7 +7,8 @@ set,
 push,
 onValue,
 update,
-child
+child,
+remove
 } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js";
 
 // Your web app's Firebase configuration
@@ -67,7 +68,11 @@ postToBoardButton.addEventListener('click', writeUserData);
 
           let deleteElement = document.createElement("i");
           deleteElement.classList.add("fa", "fa-trash", "pull-right", "delete");
-      
+          deleteElement.addEventListener("click", function(event) {
+          let messageId = event.target.parentNode.getAttribute("data-id");
+          let messageToUpdate = child(allMessagesRef, messageId);
+          remove (messageToUpdate);
+          });
 
           let upVoteElement = document.createElement("i");
           upVoteElement.classList.add("fa", "fa-thumbs-up", "pull-right");
@@ -98,6 +103,7 @@ postToBoardButton.addEventListener('click', writeUserData);
          messages.push(newLiTag);
 
          };
+
         messageBoard.innerHTML = "";
         messages.forEach(message => {
         messageBoard.append(message)
