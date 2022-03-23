@@ -1,6 +1,6 @@
 
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
 import { getDatabase,
 ref,
 set,
@@ -8,8 +8,15 @@ push,
 onValue,
 update,
 child,
-remove
-} from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js";
+remove,
+} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-auth.js";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -29,19 +36,40 @@ const firebaseConfig = {
   const app = initializeApp(firebaseConfig);
   const mySkiDatatbase = getDatabase(app);
 
+const auth = getAuth ();
 const messageBoard = document.querySelector(".message-board")
 
 const messageText = document.querySelector("#message");
 const postToBoardButton = document.querySelector(".btn")
 
+const emailInput = document.querySelector("input[name='email']");
+const passwordInput = document.querySelector("input[name='password']");
+const signUpButton = document.querySelector('.sign-up-button');
+const signInButton = document.querySelector('.sign-In-button');
+const signOutButton = document.querySelector('.sign-Out-button');
+const welcomeSpan = document.querySelector(".welcome");
 
+signUpButton.addEventListener("click", signUpUser);
+// signInButton.addEventListener("click", )
+
+function signUpUser() {
+  let email = emailInput.value;
+  let password = passwordInput.value;
+  console.log(email, password);
+
+  createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    const user = userCredential.user;
+    welcomeSpan.textContent = `${user.email} is signed in`;
+    console.log(user);
+  });
+}
 
 messageText.addEventListener("keypress", (event) => {
   if (event.keyCode === 13) {
     writeUserData(event);
   }else(postToBoardButton.addEventListener("click", writeUserData))
 });
-
 
   function writeUserData(event) {
     event.preventDefault();
@@ -90,7 +118,6 @@ messageText.addEventListener("keypress", (event) => {
                        
           });
          
-
           let downVoteElement = document.createElement("i");
           downVoteElement.classList.add("fa", "fa-thumbs-down", "pull-right");
           downVoteElement.addEventListener("click", function(event) {
@@ -99,7 +126,6 @@ messageText.addEventListener("keypress", (event) => {
            update(messageToUpdate, { votes: --votes });
                        
           });
-          
           
          let showVotesElement = document.createElement("div");
          showVotesElement.classList.add("pull-right");
