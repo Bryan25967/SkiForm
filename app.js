@@ -46,7 +46,7 @@ const emailInput = document.querySelector("input[name='email']");
 const passwordInput = document.querySelector("input[name='password']");
 const signUpButton = document.querySelector('.sign-up-button');
 const signInButton = document.querySelector('.sign-in-button');
-const signOutButton = document.querySelector('.sign-Out-button');
+const signOutButton = document.querySelector('.sign-out-button');
 const welcomeSpan = document.querySelector(".welcome");
 
 
@@ -78,6 +78,15 @@ function signUpUser() {
     const user = userCredential.user;
     welcomeSpan.textContent = `${user.email} has signed up`;
     console.log(user);
+  });
+}
+
+signOutButton.addEventListener("click", signOutUser);
+
+function signOutUser() {
+  signOut(auth)
+  .then(() => {
+    welcomeSpan.textContent = `You are signed out`;
   });
 }
 
