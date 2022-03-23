@@ -45,12 +45,28 @@ const postToBoardButton = document.querySelector(".btn")
 const emailInput = document.querySelector("input[name='email']");
 const passwordInput = document.querySelector("input[name='password']");
 const signUpButton = document.querySelector('.sign-up-button');
-const signInButton = document.querySelector('.sign-In-button');
+const signInButton = document.querySelector('.sign-in-button');
 const signOutButton = document.querySelector('.sign-Out-button');
 const welcomeSpan = document.querySelector(".welcome");
 
+
+
+signInButton.addEventListener("click", signInUser);
+
+function signInUser() {
+  let email = emailInput.value;
+  let password = passwordInput.value;
+  console.log(email, password);
+
+  signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    const user = userCredential.user;
+    welcomeSpan.textContent = `${user.email} is signed in`;
+    console.log(user);
+  });
+}
+
 signUpButton.addEventListener("click", signUpUser);
-// signInButton.addEventListener("click", )
 
 function signUpUser() {
   let email = emailInput.value;
@@ -60,7 +76,7 @@ function signUpUser() {
   createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     const user = userCredential.user;
-    welcomeSpan.textContent = `${user.email} is signed in`;
+    welcomeSpan.textContent = `${user.email} has signed up`;
     console.log(user);
   });
 }
