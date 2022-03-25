@@ -1,5 +1,3 @@
-
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
 import { getDatabase,
 ref,
@@ -48,8 +46,6 @@ const signUpButton = document.querySelector('.sign-up-button');
 const signInButton = document.querySelector('.sign-in-button');
 const signOutButton = document.querySelector('.sign-out-button');
 const welcomeSpan = document.querySelector(".welcome");
-
-
 
 signInButton.addEventListener("click", signInUser);
 
@@ -107,7 +103,6 @@ messageText.addEventListener("keypress", (event) => {
      const postMessagesRef = ref(mySkiDatatbase, "messages");
     //  const newMessagesRef = push(postMessagesRef);
      set(push(postMessagesRef), message);
-     
     //  set(newMessagesRef, message);
   }
  
@@ -117,7 +112,7 @@ messageText.addEventListener("keypress", (event) => {
      
       onValue(allMessagesRef, snapshot => {
         const allMessages = snapshot.val();
-         const messages = [];
+        const messages = [];
 
         for(let id in allMessages) {
           let message = allMessages[id].message;
@@ -140,8 +135,7 @@ messageText.addEventListener("keypress", (event) => {
             let messageId = event.target.parentNode.getAttribute("data-id");
             let messageToUpdate = child(allMessagesRef, messageId);
            update(messageToUpdate, { votes: ++votes });
-                       
-          });
+           });
          
           let downVoteElement = document.createElement("i");
           downVoteElement.classList.add("fa", "fa-thumbs-down", "pull-right");
@@ -149,7 +143,6 @@ messageText.addEventListener("keypress", (event) => {
             let messageId = event.target.parentNode.getAttribute("data-id");
             let messageToUpdate = child(allMessagesRef, messageId);
            update(messageToUpdate, { votes: --votes });
-                       
           });
           
          let showVotesElement = document.createElement("div");
@@ -159,18 +152,15 @@ messageText.addEventListener("keypress", (event) => {
           
          newLiTag.setAttribute('data-id', id)
          messages.push(newLiTag);
-
          };
 
         messageBoard.innerHTML = "";
         messages.forEach(message => {
         messageBoard.append(message)
         });
-
         // messageBoard.append(newLiTag);  
       });
   }
-
 
   // writeUserData();
   window.onload = getAllMessages();
