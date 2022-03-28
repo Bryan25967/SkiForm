@@ -1,0 +1,26 @@
+h1 {
+    color: rgb(39, 78, 187);
+    
+}
+
+.sign-up-button {
+    color: rgb(39, 78, 187);
+}
+
+.sign-in-button {
+    color: rgb(39, 78, 187);
+}
+
+.sign-out-button {
+    color: rgb(39, 78, 187);
+}
+
+#panelHeading {
+    color: rgb(39, 78, 187);
+    background-color: rgb(217, 238, 238) ;
+}
+
+#postToBoardButton {
+    color: rgb(39, 78, 187);
+    background-color: rgb(217, 238, 238);
+}
