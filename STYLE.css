@@ -1,18 +1,29 @@
 h1 {
     color: rgb(39, 78, 187);
+    margin-top: 25%;
+    font-size: 4em;
+    font-weight: bold;
     
 }
 
 .sign-up-button {
     color: rgb(39, 78, 187);
+    position: absolute;
+    left: 1%;
+    
 }
 
 .sign-in-button {
     color: rgb(39, 78, 187);
+    position: absolute;
+    right: 6%;
 }
 
 .sign-out-button {
     color: rgb(39, 78, 187);
+    position: absolute;
+    right: 1%;
+    
 }
 
 #panelHeading {
@@ -23,4 +34,18 @@ h1 {
 #postToBoardButton {
     color: rgb(39, 78, 187);
     background-color: rgb(217, 238, 238);
+}
+
+#email {
+    position: absolute;
+    right: 50%;
+}
+
+#password {
+    position: absolute;
+    right: 35%;
+}
+
+.container-fluid {
+    width: fit-content;
 }
