@@ -10,6 +10,7 @@ h1 {
     color: rgb(39, 78, 187);
     position: absolute;
     left: 1%;
+    margin-top: .5%;
     
 }
 
@@ -17,12 +18,14 @@ h1 {
     color: rgb(39, 78, 187);
     position: absolute;
     right: 6%;
+    margin-top: .5%;
 }
 
 .sign-out-button {
     color: rgb(39, 78, 187);
     position: absolute;
     right: 1%;
+    margin-top: .5%;
     
 }
 
@@ -39,11 +42,13 @@ h1 {
 #email {
     position: absolute;
     right: 50%;
+    margin-top: .5%;
 }
 
 #password {
     position: absolute;
     right: 35%;
+    margin-top: .5%;
 }
 
 .container-fluid {
