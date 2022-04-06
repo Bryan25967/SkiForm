@@ -98,6 +98,7 @@ messageText.addEventListener("keypress", (event) => {
     let message = {
     message: messageText.value,
     votes: 0,
+      
     };
     messageText.value = "";
      const postMessagesRef = ref(mySkiDatatbase, "messages");
@@ -144,19 +145,28 @@ messageText.addEventListener("keypress", (event) => {
             let messageToUpdate = child(allMessagesRef, messageId);
            update(messageToUpdate, { votes: --votes });
           });
-          
-         let showVotesElement = document.createElement("div");
+        
+
+        let showVotesElement = document.createElement("div");
          showVotesElement.classList.add("pull-right");
          showVotesElement.textContent = votes;
          newLiTag.append(deleteElement, downVoteElement, upVoteElement, showVotesElement);
           
          newLiTag.setAttribute('data-id', id)
          messages.push(newLiTag);
-         };
+        
+        };
+
+       
 
         messageBoard.innerHTML = "";
         messages.forEach(message => {
-        messageBoard.append(message)
+        messageBoard.append(message);
+      
+       
+        
+        
+     
         });
         // messageBoard.append(newLiTag);  
       });
