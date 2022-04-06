@@ -21,9 +21,6 @@ import {
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
-
-
-
 const firebaseConfig = {
   apiKey: "AIzaSyCtxY9curZWGN86h3sP0kldCAoeBJcfJ1A",
   authDomain: "ski-forum-1c479.firebaseapp.com",
